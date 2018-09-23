@@ -1,16 +1,16 @@
 package sk.tomas.iti.core.impl;
 
-import sk.tomas.iti.ImageLoader;
-import sk.tomas.iti.Line;
-import sk.tomas.iti.Node;
-import sk.tomas.iti.Randomizer;
+import sk.tomas.iti.config.ImageLoader;
+import sk.tomas.iti.bo.Line;
+import sk.tomas.iti.bo.Node;
+import sk.tomas.iti.config.Randomizer;
 import sk.tomas.iti.core.Core;
 import sk.tomas.servant.annotation.Bean;
 import sk.tomas.servant.annotation.Inject;
 
 import java.awt.image.BufferedImage;
 
-import static sk.tomas.iti.Configuration.*;
+import static sk.tomas.iti.config.Configuration.*;
 
 @Bean("core")
 public class CoreImpl implements Core {
@@ -68,8 +68,8 @@ public class CoreImpl implements Core {
 
     @Override
     public int fitness() {
-        linesToBoard();
         int count = 0;
+        cleanLinesInBoard();
         linesToBoard();
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
@@ -82,6 +82,14 @@ public class CoreImpl implements Core {
             }
         }
         return count;
+    }
+
+    private void cleanLinesInBoard() {
+        for (int i = 0; i < WIDTH; i++) {
+            for (int j = 0; j < HEIGHT; j++) {
+                board[i][j].setLine(false);
+            }
+        }
     }
 
     private void linesToBoard() {

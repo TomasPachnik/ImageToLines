@@ -1,7 +1,7 @@
 package sk.tomas.iti.core;
 
-import sk.tomas.iti.Line;
-import sk.tomas.iti.Node;
+import sk.tomas.iti.bo.Line;
+import sk.tomas.iti.bo.Node;
 
 public interface Core {
 

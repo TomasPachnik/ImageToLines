@@ -1,10 +1,11 @@
-package sk.tomas.iti;
+package sk.tomas.iti.config;
 
+import sk.tomas.iti.bo.Line;
 import sk.tomas.servant.annotation.Bean;
 
 import java.util.Random;
 
-import static sk.tomas.iti.Configuration.*;
+import static sk.tomas.iti.config.Configuration.*;
 
 @Bean
 public class Randomizer {

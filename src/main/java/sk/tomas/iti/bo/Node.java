@@ -1,4 +1,4 @@
-package sk.tomas.iti;
+package sk.tomas.iti.bo;
 
 public class Node {
 
