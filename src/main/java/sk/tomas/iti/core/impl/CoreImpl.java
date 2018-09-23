@@ -1,8 +1,8 @@
 package sk.tomas.iti.core.impl;
 
-import sk.tomas.iti.config.ImageLoader;
 import sk.tomas.iti.bo.Line;
 import sk.tomas.iti.bo.Node;
+import sk.tomas.iti.config.ImageLoader;
 import sk.tomas.iti.config.Randomizer;
 import sk.tomas.iti.core.Core;
 import sk.tomas.servant.annotation.Bean;
@@ -84,6 +84,16 @@ public class CoreImpl implements Core {
         return count;
     }
 
+    @Override
+    public void changePosition() {
+        for (Line line : lines) {
+            move(line, randomizer.generateShiftX(), randomizer.generateShiftY());
+            rotate(line, randomizer.generateAngle());
+        }
+        cleanLinesInBoard();
+        linesToBoard();
+    }
+
     private void cleanLinesInBoard() {
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
@@ -105,6 +115,30 @@ public class CoreImpl implements Core {
         for (int x = line.getFromX(); x < line.getToX(); x++) {
             int y = line.getFromY() + dy * (x - line.getFromX()) / dx;
             board[x - OFFSET_X][y - OFFSET_Y].setLine(true);
+        }
+    }
+
+    private void move(Line input, int x, int y) {
+        if (input.getFromX() + x >= OFFSET_X && input.getFromX() + x < WIDTH + OFFSET_X
+                && input.getToX() + x >= OFFSET_X && input.getToX() + x < WIDTH + OFFSET_X
+                && input.getFromY() + y >= OFFSET_Y && input.getFromY() + y < HEIGHT + OFFSET_Y
+                && input.getToY() + y >= OFFSET_Y && input.getToY() + y < HEIGHT + OFFSET_Y) {
+            input.setFromX(input.getFromX() + x);
+            input.setToX(input.getToX() + x);
+            input.setFromY(input.getFromY() + y);
+            input.setToY(input.getToY() + y);
+        }
+    }
+
+    private void rotate(Line input, int angle) {
+        int x1 = input.getToX() - input.getFromX();
+        int y1 = input.getFromY() - input.getToY();
+        double x2 = input.getFromX() + (((x1 * Math.cos(angle * Math.PI / 180))) - ((int) (y1 * Math.sin(angle * Math.PI / 180))));
+        double y2 = input.getFromY() - (((x1 * Math.sin(angle * Math.PI / 180))) + ((int) (y1 * Math.cos(angle * Math.PI / 180))));
+
+        if (x2 >= OFFSET_X && x2 < WIDTH + OFFSET_X && y2 >= OFFSET_Y && y2 < HEIGHT + OFFSET_Y) {
+            input.setToX((int) x2);
+            input.setToY((int) y2);
         }
     }
 

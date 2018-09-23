@@ -6,10 +6,7 @@ import sk.tomas.servant.annotation.Inject;
 import sk.tomas.servant.annotation.PostInit;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 
 @Bean("mainWindow")
 public class MainWindow extends JFrame {
@@ -29,6 +26,7 @@ public class MainWindow extends JFrame {
         createListeners();
         createMenuBar();
         setVisible(true);
+
     }
 
     private void randomizeLines() {
@@ -36,6 +34,11 @@ public class MainWindow extends JFrame {
         core.imageToBoard();
         imagePanel.repaint();
         System.out.println(core.fitness());
+    }
+
+    private void rotate() {
+        core.changePosition();
+        imagePanel.repaint();
     }
 
     private void createMenuBar() {
@@ -50,12 +53,18 @@ public class MainWindow extends JFrame {
         newGame.setToolTipText("Generate new lines");
         newGame.addActionListener((ActionEvent event) -> randomizeLines());
 
+        JMenuItem rotate = new JMenuItem("Rotate");
+        rotate.setMnemonic(KeyEvent.VK_E);
+        rotate.setToolTipText("Rotate");
+        rotate.addActionListener((ActionEvent event) -> rotate());
+
         JMenuItem exit = new JMenuItem("Exit");
         exit.setMnemonic(KeyEvent.VK_E);
         exit.setToolTipText("Exit application");
         exit.addActionListener((ActionEvent event) -> System.exit(0));
 
         file.add(newGame);
+        file.add(rotate);
         file.add(exit);
 
         menubar.add(file);
@@ -68,6 +77,22 @@ public class MainWindow extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
+            }
+        });
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent keyEvent) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {
+                rotate();
+            }
+
+            @Override
+            public void keyReleased(KeyEvent keyEvent) {
+
             }
         });
     }

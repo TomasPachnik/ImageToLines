@@ -13,11 +13,17 @@ public class Randomizer {
     private Random fromX;
     private Random fromY;
     private Random length;
+    private Random shiftX;
+    private Random shiftY;
+    private Random angle;
 
     public Randomizer() {
         fromX = new Random();
         fromY = new Random();
         length = new Random();
+        shiftX = new Random();
+        shiftY = new Random();
+        angle = new Random();
     }
 
     public Line generateLines() {
@@ -34,4 +40,15 @@ public class Randomizer {
         return new Line(x, y, x + lengthX, y + lengthY);
     }
 
+    public int generateShiftX() {
+        return shiftX.nextInt(100) - 50;
+    }
+
+    public int generateShiftY() {
+        return shiftY.nextInt(100) - 50;
+    }
+
+    public int generateAngle() {
+        return angle.nextInt(50) - 25;
+    }
 }

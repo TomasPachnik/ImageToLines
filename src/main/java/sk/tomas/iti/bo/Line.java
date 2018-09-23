@@ -45,4 +45,14 @@ public class Line {
     public void setToY(int toY) {
         this.toY = toY;
     }
+
+    @Override
+    public String toString() {
+        return "Line{" +
+                "fromX=" + fromX +
+                ", fromY=" + fromY +
+                ", toX=" + toX +
+                ", toY=" + toY +
+                '}';
+    }
 }

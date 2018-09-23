@@ -15,4 +15,6 @@ public interface Core {
 
     int fitness();
 
+    void changePosition();
+
 }
