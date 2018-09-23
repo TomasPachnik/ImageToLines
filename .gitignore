@@ -1,11 +1,20 @@
 # Compiled class file
 *.class
+*.dll
+
+# Folders
+.gradle/
+.idea/
+build/
 
 # Log file
 *.log
 
 # BlueJ files
 *.ctxt
+
+# Idea files
+*.iml
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -21,3 +30,4 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+gradle/wrapper/gradle-wrapper.properties
