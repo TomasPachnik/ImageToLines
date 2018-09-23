@@ -1,5 +1,6 @@
 package sk.tomas.iti.gui;
 
+import sk.tomas.iti.core.Core;
 import sk.tomas.servant.annotation.Bean;
 import sk.tomas.servant.annotation.Inject;
 import sk.tomas.servant.annotation.PostInit;
@@ -13,6 +14,8 @@ public class MainWindow extends JFrame {
 
     @Inject
     private ImagePanel imagePanel;
+    @Inject
+    private Core core;
 
     @PostInit
     public void init() {
@@ -23,7 +26,15 @@ public class MainWindow extends JFrame {
         getContentPane().add(imagePanel);
         createListeners();
         setVisible(true);
+        start();
     }
+
+    //TODO add to button
+    private void start() {
+        core.initLines();
+        core.imageToBoard();
+    }
+
 
     private void createListeners() {
         addWindowListener(new WindowAdapter() {
