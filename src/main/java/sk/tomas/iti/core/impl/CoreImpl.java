@@ -31,7 +31,7 @@ public class CoreImpl implements Core {
         board = new Node[WIDTH][HEIGHT];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[j].length; j++) {
-                board[i][j] = new Node(false);
+                board[i][j] = new Node();
             }
         }
     }
@@ -63,6 +63,40 @@ public class CoreImpl implements Core {
                     board[i][j].setFill(true);
                 }
             }
+        }
+    }
+
+    @Override
+    public int fitness() {
+        linesToBoard();
+        int count = 0;
+        linesToBoard();
+        for (int i = 0; i < WIDTH; i++) {
+            for (int j = 0; j < HEIGHT; j++) {
+                if (board[i][j].isFill()) {
+                    count++;
+                }
+                if (board[i][j].isLine()) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    private void linesToBoard() {
+        for (Line line : lines) {
+            calculateLinePoints(line);
+        }
+    }
+
+    private void calculateLinePoints(Line line) {
+        int dx = line.getToX() - line.getFromX();
+        int dy = line.getToY() - line.getFromY();
+
+        for (int x = line.getFromX(); x < line.getToX(); x++) {
+            int y = line.getFromY() + dy * (x - line.getFromX()) / dx;
+            board[x - OFFSET_X][y - OFFSET_Y].setLine(true);
         }
     }
 

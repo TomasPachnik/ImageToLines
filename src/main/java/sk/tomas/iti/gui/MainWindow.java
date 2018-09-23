@@ -33,6 +33,7 @@ public class MainWindow extends JFrame {
     private void start() {
         core.initLines();
         core.imageToBoard();
+        System.out.println(core.fitness());
     }
 
 

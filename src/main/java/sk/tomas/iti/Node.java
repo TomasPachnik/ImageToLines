@@ -3,9 +3,10 @@ package sk.tomas.iti;
 public class Node {
 
     private boolean fill;
+    private boolean line;
 
-    public Node(boolean fill) {
-        this.fill = fill;
+    public Node() {
+
     }
 
     public boolean isFill() {
@@ -14,5 +15,13 @@ public class Node {
 
     public void setFill(boolean fill) {
         this.fill = fill;
+    }
+
+    public boolean isLine() {
+        return line;
+    }
+
+    public void setLine(boolean line) {
+        this.line = line;
     }
 }
