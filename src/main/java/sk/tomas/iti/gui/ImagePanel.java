@@ -43,7 +43,7 @@ public class ImagePanel extends JPanel {
         g.setColor(Color.BLACK);
         if (core.getLines() != null)
             for (Line line : core.getLines()) {
-                g.drawLine(line.getFromX(), line.getFromY(), line.getToX(), line.getToY());
+                g.drawLine((int) line.getFromX(), (int) line.getFromY(), (int) line.getToX(), (int) line.getToY());
             }
     }
 

@@ -73,10 +73,7 @@ public class CoreImpl implements Core {
         linesToBoard();
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
-                if (board[i][j].isFill()) {
-                    count++;
-                }
-                if (board[i][j].isLine()) {
+                if (board[i][j].isFill() && board[i][j].isLine()) {
                     count++;
                 }
             }
@@ -109,11 +106,11 @@ public class CoreImpl implements Core {
     }
 
     private void calculateLinePoints(Line line) {
-        int dx = line.getToX() - line.getFromX();
-        int dy = line.getToY() - line.getFromY();
+        double dx = line.getToX() - line.getFromX();
+        double dy = line.getToY() - line.getFromY();
 
-        for (int x = line.getFromX(); x < line.getToX(); x++) {
-            int y = line.getFromY() + dy * (x - line.getFromX()) / dx;
+        for (int x = (int) line.getFromX(); x < line.getToX(); x++) {
+            int y = (int) (line.getFromY() + dy * (x - line.getFromX()) / dx);
             board[x - OFFSET_X][y - OFFSET_Y].setLine(true);
         }
     }
@@ -131,14 +128,14 @@ public class CoreImpl implements Core {
     }
 
     private void rotate(Line input, int angle) {
-        int x1 = input.getToX() - input.getFromX();
-        int y1 = input.getFromY() - input.getToY();
-        double x2 = input.getFromX() + (((x1 * Math.cos(angle * Math.PI / 180))) - ((int) (y1 * Math.sin(angle * Math.PI / 180))));
-        double y2 = input.getFromY() - (((x1 * Math.sin(angle * Math.PI / 180))) + ((int) (y1 * Math.cos(angle * Math.PI / 180))));
+        double x1 = input.getToX() - input.getFromX();
+        double y1 = input.getFromY() - input.getToY();
+        double x2 = input.getFromX() + (((x1 * Math.cos(angle * Math.PI / 180))) - ((y1 * Math.sin(angle * Math.PI / 180))));
+        double y2 = input.getFromY() - (((x1 * Math.sin(angle * Math.PI / 180))) + ((y1 * Math.cos(angle * Math.PI / 180))));
 
         if (x2 >= OFFSET_X && x2 < WIDTH + OFFSET_X && y2 >= OFFSET_Y && y2 < HEIGHT + OFFSET_Y) {
-            input.setToX((int) x2);
-            input.setToY((int) y2);
+            input.setToX(x2);
+            input.setToY(y2);
         }
     }
 

@@ -2,47 +2,47 @@ package sk.tomas.iti.bo;
 
 public class Line {
 
-    private int fromX;
-    private int fromY;
-    private int toX;
-    private int toY;
+    private double fromX;
+    private double fromY;
+    private double toX;
+    private double toY;
 
-    public Line(int fromX, int fromY, int toX, int toY) {
+    public Line(double fromX, double fromY, double toX, double toY) {
         this.fromX = fromX;
         this.fromY = fromY;
         this.toX = toX;
         this.toY = toY;
     }
 
-    public int getFromX() {
+    public double getFromX() {
         return fromX;
     }
 
-    public void setFromX(int fromX) {
+    public void setFromX(double fromX) {
         this.fromX = fromX;
     }
 
-    public int getFromY() {
+    public double getFromY() {
         return fromY;
     }
 
-    public void setFromY(int fromY) {
+    public void setFromY(double fromY) {
         this.fromY = fromY;
     }
 
-    public int getToX() {
+    public double getToX() {
         return toX;
     }
 
-    public void setToX(int toX) {
+    public void setToX(double toX) {
         this.toX = toX;
     }
 
-    public int getToY() {
+    public double getToY() {
         return toY;
     }
 
-    public void setToY(int toY) {
+    public void setToY(double toY) {
         this.toY = toY;
     }
 

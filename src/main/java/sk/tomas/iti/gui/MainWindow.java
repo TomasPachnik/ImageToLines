@@ -33,10 +33,9 @@ public class MainWindow extends JFrame {
         core.initLines();
         core.imageToBoard();
         imagePanel.repaint();
-        System.out.println(core.fitness());
     }
 
-    private void rotate() {
+    private void changePosition() {
         core.changePosition();
         imagePanel.repaint();
     }
@@ -56,7 +55,7 @@ public class MainWindow extends JFrame {
         JMenuItem rotate = new JMenuItem("Rotate");
         rotate.setMnemonic(KeyEvent.VK_E);
         rotate.setToolTipText("Rotate");
-        rotate.addActionListener((ActionEvent event) -> rotate());
+        rotate.addActionListener((ActionEvent event) -> changePosition());
 
         JMenuItem exit = new JMenuItem("Exit");
         exit.setMnemonic(KeyEvent.VK_E);
@@ -87,7 +86,8 @@ public class MainWindow extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                rotate();
+                changePosition();
+                System.out.println(core.fitness());
             }
 
             @Override
