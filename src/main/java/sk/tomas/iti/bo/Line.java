@@ -1,6 +1,8 @@
 package sk.tomas.iti.bo;
 
-public class Line {
+import java.io.Serializable;
+
+public class Line implements Serializable {
 
     private double fromX;
     private double fromY;

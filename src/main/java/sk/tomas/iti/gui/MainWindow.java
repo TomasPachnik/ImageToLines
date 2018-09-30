@@ -1,6 +1,9 @@
 package sk.tomas.iti.gui;
 
 import sk.tomas.iti.core.Core;
+import sk.tomas.iti.core.IndividualImpl;
+import sk.tomas.iti.ga.Genetic;
+import sk.tomas.iti.ga.impl.GeneticImpl;
 import sk.tomas.servant.annotation.Bean;
 import sk.tomas.servant.annotation.Inject;
 import sk.tomas.servant.annotation.PostInit;
@@ -12,11 +15,13 @@ import java.awt.event.*;
 public class MainWindow extends JFrame {
 
     @Inject
+    private Genetic genetic;
+    @Inject
     private ImagePanel imagePanel;
     @Inject
     private Core core;
 
-    //@PostInit
+    @PostInit
     public void init() {
         setTitle("Image to lines");
         setSize(800, 620);
@@ -27,12 +32,14 @@ public class MainWindow extends JFrame {
         createMenuBar();
         setVisible(true);
 
+
     }
 
     private void randomizeLines() {
-        core.initLines();
-        core.imageToBoard();
-        imagePanel.repaint();
+        genetic.run();
+        //core.initLines();
+        //core.imageToBoard();
+        //imagePanel.repaint();
     }
 
     private void changePosition() {

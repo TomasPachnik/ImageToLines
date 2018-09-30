@@ -1,6 +1,8 @@
 package sk.tomas.iti.bo;
 
-public class Node {
+import java.io.Serializable;
+
+public class Node implements Serializable {
 
     private int fill;
     private boolean line;

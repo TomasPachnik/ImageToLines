@@ -1,6 +1,8 @@
 package sk.tomas.iti.ga;
 
-public abstract class Individual {
+import java.io.Serializable;
+
+public abstract class Individual implements Serializable {
 
     protected double fitness = 0;
     private double runs = 0;
@@ -9,7 +11,7 @@ public abstract class Individual {
         return fitness;
     }
 
-    public abstract void mutate();
+    public abstract void mutate(double mutationRate);
 
     public abstract void init();
 

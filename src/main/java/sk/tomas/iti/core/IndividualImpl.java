@@ -17,8 +17,8 @@ public class IndividualImpl extends Individual {
     private Line[] lines;
 
     @Override
-    public void mutate() {
-        changePosition();
+    public void mutate(double mutationRate) {
+        changePosition(mutationRate);
     }
 
     @Override
@@ -37,17 +37,29 @@ public class IndividualImpl extends Individual {
     public Individual[] cross(Individual parent2) {
 
         IndividualImpl par2 = (IndividualImpl) parent2;
+
+        for (int i = 0; i < lines.length; i++) {
+            if (Math.random() > 0.5) {
+                Line temp = lines[i];
+                lines[i] = par2.getLines()[i];
+                par2.getLines()[i] = temp;
+            }
+        }
+
         Individual[] result = new IndividualImpl[2];
         result[0] = this;
         result[1] = par2;
         return result;
     }
 
-
-    private void changePosition() {
+    private void changePosition(double mutationRate) {
         for (Line line : lines) {
-            move(line, Randomizer.generateShiftX(), Randomizer.generateShiftY());
-            rotate(line, Randomizer.generateAngle());
+            if (mutationRate > Math.random()) {
+                move(line, Randomizer.generateShiftX(), Randomizer.generateShiftY());
+            }
+            if (mutationRate > Math.random()) {
+                rotate(line, Randomizer.generateAngle());
+            }
         }
         cleanLinesInBoard();
         linesToBoard();
@@ -176,4 +188,11 @@ public class IndividualImpl extends Individual {
         }
     }
 
+    public Line[] getLines() {
+        return lines;
+    }
+
+    public Node[][] getBoard() {
+        return board;
+    }
 }
