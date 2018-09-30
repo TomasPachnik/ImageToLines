@@ -19,8 +19,6 @@ public class CoreImpl implements Core {
     private Line[] lines;
 
     @Inject
-    private Randomizer randomizer;
-    @Inject
     private ImageLoader imageLoader;
 
     public CoreImpl() {
@@ -40,7 +38,7 @@ public class CoreImpl implements Core {
     public void initLines() {
         lines = new Line[LINE_COUNT];
         for (int i = 0; i < lines.length; i++) {
-            lines[i] = randomizer.generateLines();
+            lines[i] = Randomizer.generateLines();
         }
     }
 
@@ -60,7 +58,7 @@ public class CoreImpl implements Core {
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
                 if (image.getRGB(i, j) > 1_000_000 || image.getRGB(i, j) < -1_000_000) {
-                    board[i][j].setFill(true);
+                    board[i][j].setFill(1);
                 }
             }
         }
@@ -73,7 +71,7 @@ public class CoreImpl implements Core {
         linesToBoard();
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
-                if (board[i][j].isFill() && board[i][j].isLine()) {
+                if (board[i][j].getFill()>0 && board[i][j].isLine()) {
                     count++;
                 }
             }
@@ -84,8 +82,8 @@ public class CoreImpl implements Core {
     @Override
     public void changePosition() {
         for (Line line : lines) {
-            move(line, randomizer.generateShiftX(), randomizer.generateShiftY());
-            rotate(line, randomizer.generateAngle());
+            move(line, Randomizer.generateShiftX(), Randomizer.generateShiftY());
+            rotate(line, Randomizer.generateAngle());
         }
         cleanLinesInBoard();
         linesToBoard();
@@ -138,5 +136,4 @@ public class CoreImpl implements Core {
             input.setToY(y2);
         }
     }
-
 }

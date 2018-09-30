@@ -31,7 +31,7 @@ public class ImagePanel extends JPanel {
         if (core.getBoard() != null) {
             for (int i = 0; i < core.getBoard().length; i++) {
                 for (int j = 0; j < core.getBoard()[j].length; j++) {
-                    if (core.getBoard()[i][j].isFill()) {
+                    if (core.getBoard()[i][j].getFill()>0) {
                         g.drawLine(OFFSET_X + i, OFFSET_Y + j, OFFSET_X + i, OFFSET_Y + j);
                     }
                 }

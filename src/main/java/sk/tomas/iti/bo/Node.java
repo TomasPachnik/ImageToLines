@@ -2,18 +2,18 @@ package sk.tomas.iti.bo;
 
 public class Node {
 
-    private boolean fill;
+    private int fill;
     private boolean line;
 
     public Node() {
 
     }
 
-    public boolean isFill() {
+    public int getFill() {
         return fill;
     }
 
-    public void setFill(boolean fill) {
+    public void setFill(int fill) {
         this.fill = fill;
     }
 

@@ -7,48 +7,41 @@ import java.util.Random;
 
 import static sk.tomas.iti.config.Configuration.*;
 
-@Bean
-public class Randomizer {
+public final class Randomizer {
 
-    private Random fromX;
-    private Random fromY;
-    private Random length;
-    private Random shiftX;
-    private Random shiftY;
-    private Random angle;
+    private static Random fromX = new Random();
+    private static Random fromY = new Random();
+    private static Random length = new Random();
+    private static Random shiftX = new Random();
+    private static Random shiftY = new Random();
+    private static Random angle = new Random();
 
-    public Randomizer() {
-        fromX = new Random();
-        fromY = new Random();
-        length = new Random();
-        shiftX = new Random();
-        shiftY = new Random();
-        angle = new Random();
+    private Randomizer() {
     }
 
-    public Line generateLines() {
+    public static Line generateLines() {
         int x = fromX.nextInt(WIDTH) + OFFSET_X;
         int y = fromY.nextInt(HEIGHT) + OFFSET_Y;
         int lengthX;
         int lengthY;
         do {
-            lengthX = this.length.nextInt(LINE_MAX_LENGTH) - LINE_MAX_LENGTH / 2;
-            lengthY = this.length.nextInt(LINE_MAX_LENGTH) - LINE_MAX_LENGTH / 2;
+            lengthX = length.nextInt(LINE_MAX_LENGTH) - LINE_MAX_LENGTH / 2;
+            lengthY = length.nextInt(LINE_MAX_LENGTH) - LINE_MAX_LENGTH / 2;
         } while (x + lengthX > WIDTH + OFFSET_X || x + lengthX < OFFSET_X ||
                 y + lengthY > HEIGHT + OFFSET_Y || y + lengthY < OFFSET_Y);
 
         return new Line(x, y, x + lengthX, y + lengthY);
     }
 
-    public int generateShiftX() {
-        return shiftX.nextInt(100) - 50;
+    public static int generateShiftX() {
+        return shiftX.nextInt(2) - 1;
     }
 
-    public int generateShiftY() {
-        return shiftY.nextInt(100) - 50;
+    public static int generateShiftY() {
+        return shiftY.nextInt(2) - 1;
     }
 
-    public int generateAngle() {
-        return angle.nextInt(50) - 25;
+    public static int generateAngle() {
+        return angle.nextInt(2) - 1;
     }
 }

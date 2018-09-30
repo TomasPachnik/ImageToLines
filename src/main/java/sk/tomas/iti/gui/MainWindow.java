@@ -16,7 +16,7 @@ public class MainWindow extends JFrame {
     @Inject
     private Core core;
 
-    @PostInit
+    //@PostInit
     public void init() {
         setTitle("Image to lines");
         setSize(800, 620);
